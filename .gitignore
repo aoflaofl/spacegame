@@ -1,0 +1,16 @@
+# Maven
+target/
+*.log
+
+# IntelliJ / Eclipse
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+
+# OS junk
+.DS_Store
+Thumbs.db
