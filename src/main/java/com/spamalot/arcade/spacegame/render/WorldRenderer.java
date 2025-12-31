@@ -1,6 +1,7 @@
 package com.spamalot.arcade.spacegame.render;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.spamalot.arcade.spacegame.entities.Asteroid;
@@ -15,6 +16,7 @@ public class WorldRenderer implements AutoCloseable {
 
         // Draw world bounds + entities
         shapes.begin(ShapeRenderer.ShapeType.Line);
+        shapes.setColor(Color.WHITE);
 
         // World border
         shapes.rect(0, 0, GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT);
@@ -31,6 +33,15 @@ public class WorldRenderer implements AutoCloseable {
         // Asteroids
         for (Asteroid a : world.asteroids) {
             shapes.circle(a.position.x, a.position.y, a.radius);
+        }
+
+        if (world.debugCollisions) {
+            shapes.setColor(Color.RED);
+
+            shapes.circle(world.player.position.x, world.player.position.y, world.player.radius);
+            for (Asteroid a : world.asteroids) {
+                shapes.circle(a.position.x, a.position.y, a.radius);
+            }
         }
 
         shapes.end();

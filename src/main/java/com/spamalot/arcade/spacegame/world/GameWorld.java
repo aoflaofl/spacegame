@@ -9,6 +9,9 @@ import com.spamalot.arcade.spacegame.input.InputState;
 public class GameWorld {
     public final Player player;
     public final Array<Asteroid> asteroids = new Array<>();
+    public boolean debugCollisions = false;
+
+    private final CollisionSystem collisionSystem = new CollisionSystem();
 
     public GameWorld() {
         player = new Player(GameConfig.WORLD_WIDTH / 2f, GameConfig.WORLD_HEIGHT / 2f);
@@ -21,6 +24,10 @@ public class GameWorld {
     }
 
     public void update(float dt, InputState input) {
+        if (input.toggleDebugCollisions) {
+            debugCollisions = !debugCollisions;
+        }
+
         player.handleInput(input, dt);
         player.update(dt);
 
@@ -31,5 +38,7 @@ public class GameWorld {
         for (Asteroid a : asteroids) {
             a.update(dt);
         }
+
+        collisionSystem.handleCollisions(player, asteroids);
     }
 }

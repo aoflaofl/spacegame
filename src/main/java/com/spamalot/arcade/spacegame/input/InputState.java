@@ -5,4 +5,5 @@ public class InputState {
     public boolean right;
     public boolean thrust;
     public boolean brake;
+    public boolean toggleDebugCollisions;
 }
